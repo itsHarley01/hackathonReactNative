@@ -8,6 +8,8 @@ import {
   Alert,
   StyleSheet,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { loginUser, registerUser } from "../services/api";
@@ -45,31 +47,33 @@ export default function Login() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <TouchableOpacity onPress={() => handleNavigate("SignUp")}>
-        <Text style={styles.signUp}>Sign Up</Text>
-      </TouchableOpacity>
-      {error ? <Text style={styles.errorText}>{error}</Text> : null}
-      <TouchableOpacity style={styles.btn} onPress={handleAuth}>
-        <Text>Login</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Login</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
+        <TouchableOpacity onPress={() => handleNavigate("SignUp")}>
+          <Text style={styles.signUp}>Sign Up</Text>
+        </TouchableOpacity>
+        {error ? <Text style={styles.errorText}>{error}</Text> : null}
+        <TouchableOpacity style={styles.btn} onPress={handleAuth}>
+          <Text>Login</Text>
+        </TouchableOpacity>
+      </View>
+    </TouchableWithoutFeedback>
 
     // <View style={{ padding: 20 }}>
     //   <TextInput
